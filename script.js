@@ -7,7 +7,7 @@ const futureTableBody = document.getElementById('futureTableBody');
 const copyExcelBtn = document.getElementById('copyExcelBtn');
 
 // Version (IMPORTANT: Also update VERSION in sw.js when changing this!)
-const VERSION = '1.91';
+const VERSION = '1.92';
 
 // State
 let currentLang = localStorage.language || 'en';
@@ -191,7 +191,8 @@ function getExcelSerial(dateObj) {
         const diffTime = utcDate - baseDate;
         const serial = diffTime / MS_PER_DAY;
 
-        return serial;
+        // Round to 5 decimals (Excel precision for time component down to seconds)
+        return Math.round(serial * 100000) / 100000;
     } catch (error) {
         return 0;
     }
@@ -223,6 +224,55 @@ function getDateFromExcel(serial) {
     }
 }
 
+function parseDateString(str, locale) {
+    try {
+        str = str.trim();
+        let datePart = str;
+        let timePart = '00:00';
+
+        // Extract time if present (formats: HH:mm or HH:mm:ss)
+        const timeMatch = str.match(/\b(\d{1,2}):(\d{2})(?::(\d{2}))?\b/);
+        if (timeMatch) {
+            timePart = `${timeMatch[1].padStart(2, '0')}:${timeMatch[2]}`;
+            datePart = str.replace(timeMatch[0], '').trim();
+        }
+
+        // Try ISO formats first (universal): yyyy-MM-dd or yyyy-MM-ddTHH:mm
+        const isoMatch = datePart.match(/^(\d{4})[-\/]?(\d{2})[-\/]?(\d{2})/);
+        if (isoMatch) {
+            const [, year, month, day] = isoMatch;
+            return { date: `${year}-${month}-${day}`, time: timePart };
+        }
+
+        // Locale-specific parsing
+        if (locale === 'en') {
+            // American: MM/dd/yyyy or MM-dd-yyyy
+            const usMatch = datePart.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+            if (usMatch) {
+                const [, month, day, year] = usMatch;
+                return { 
+                    date: `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`, 
+                    time: timePart 
+                };
+            }
+        } else {
+            // European (DA/NO/SV/DE): dd-MM-yyyy, dd.MM.yyyy, dd/MM/yyyy
+            const euMatch = datePart.match(/^(\d{1,2})[\.\-\/](\d{1,2})[\.\-\/](\d{4})/);
+            if (euMatch) {
+                const [, day, month, year] = euMatch;
+                return { 
+                    date: `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`, 
+                    time: timePart 
+                };
+            }
+        }
+
+        return null;
+    } catch (error) {
+        return null;
+    }
+}
+
 function updateFromDateInputs() {
     const dateVal = dateInput.value;
     const timeVal = timeInput.value || '00:00';
@@ -231,7 +281,12 @@ function updateFromDateInputs() {
         const fullDateStr = `${dateVal}T${timeVal}`;
         const date = new Date(fullDateStr);
         const serial = getExcelSerial(date);
-        excelInput.value = serial;
+        // Force US locale formatting with dot as decimal separator
+        excelInput.value = Number(serial).toLocaleString('en-US', { 
+            useGrouping: false, 
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 20 
+        });
 
         // Show copy button when value exists
         if (serial) {
@@ -275,7 +330,24 @@ function debouncedLog(action) {
 }
 
 // Event Listeners
+
+// Excel input: Normalize comma to dot for decimal separator (DA/NO/SV/DE locales)
+function normalizeExcelInput() {
+    if (excelInput.value) {
+        excelInput.value = excelInput.value.replace(/,/g, '.');
+    }
+}
+
+excelInput.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+    const normalized = pastedText.replace(/,/g, '.');
+    excelInput.value = normalized;
+    excelInput.dispatchEvent(new Event('input', { bubbles: true }));
+});
+
 excelInput.addEventListener('input', (e) => {
+    normalizeExcelInput();
     const val = parseFloat(e.target.value);
     if (!isNaN(val)) {
         const dateObj = getDateFromExcel(val);
@@ -298,6 +370,38 @@ excelInput.addEventListener('input', (e) => {
         timeInput.value = '00:00';
         copyExcelBtn.classList.add('opacity-0', 'pointer-events-none');
     }
+});
+
+excelInput.addEventListener('blur', normalizeExcelInput);
+
+// Date input: Smart paste parser
+dateInput.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+    const parsed = parseDateString(pastedText, currentLang);
+    
+    if (parsed) {
+        dateInput.value = parsed.date;
+        timeInput.value = parsed.time;
+        updateFromDateInputs();
+    } else {
+        // Fallback: let browser handle it
+        dateInput.value = pastedText;
+    }
+});
+
+// Time input: Also handle full datetime pastes
+timeInput.addEventListener('paste', (e) => {
+    const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+    const parsed = parseDateString(pastedText, currentLang);
+    
+    if (parsed && parsed.date) {
+        e.preventDefault();
+        dateInput.value = parsed.date;
+        timeInput.value = parsed.time;
+        updateFromDateInputs();
+    }
+    // If no date part, let browser handle time-only paste normally
 });
 
 dateInput.addEventListener('input', updateFromDateInputs);
