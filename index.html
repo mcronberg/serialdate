@@ -95,7 +95,7 @@
         },
         "inLanguage": ["en", "da", "no", "sv", "de"],
         "browserRequirements": "Requires JavaScript. Requires HTML5.",
-        "softwareVersion": "1.8",
+        "softwareVersion": "1.93",
         "screenshot": "https://mcronberg.github.io/serialdate/assets/icon.png",
         "featureList": [
             "Convert Excel serial dates to readable dates",
@@ -213,8 +213,10 @@
                 <div class="flex gap-4">
                     <input type="date" id="dateInput"
                         class="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-6 py-4 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all">
-                    <input type="time" id="timeInput" value="00:00"
-                        class="w-32 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-4 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all">
+                    <input type="time" id="timeInput" value="00:00:00" step="1"
+                        class="w-44 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-4 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all">
+                    <input type="number" id="msInput" value="0" min="0" max="999" placeholder="ms"
+                        class="w-24 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-4 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all">
                 </div>
             </div>
 

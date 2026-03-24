@@ -5,9 +5,10 @@ const langToggle = document.getElementById('langToggle');
 const pastTableBody = document.getElementById('pastTableBody');
 const futureTableBody = document.getElementById('futureTableBody');
 const copyExcelBtn = document.getElementById('copyExcelBtn');
+const msInput = document.getElementById('msInput');
 
 // Version (IMPORTANT: Also update VERSION in sw.js when changing this!)
-const VERSION = '1.92';
+const VERSION = '1.93';
 
 // State
 let currentLang = localStorage.language || 'en';
@@ -184,15 +185,15 @@ function getExcelSerial(dateObj) {
             dateObj.getDate(),
             dateObj.getHours(),
             dateObj.getMinutes(),
-            dateObj.getSeconds()
+            dateObj.getSeconds(),
+            dateObj.getMilliseconds()
         );
 
         const baseDate = Date.UTC(1899, 11, 30);
         const diffTime = utcDate - baseDate;
         const serial = diffTime / MS_PER_DAY;
 
-        // Round to 5 decimals (Excel precision for time component down to seconds)
-        return Math.round(serial * 100000) / 100000;
+        return serial;
     } catch (error) {
         return 0;
     }
@@ -275,11 +276,13 @@ function parseDateString(str, locale) {
 
 function updateFromDateInputs() {
     const dateVal = dateInput.value;
-    const timeVal = timeInput.value || '00:00';
+    const timeVal = timeInput.value || '00:00:00';
+    const ms = Math.min(999, Math.max(0, parseInt(msInput.value) || 0));
 
     if (dateVal) {
         const fullDateStr = `${dateVal}T${timeVal}`;
         const date = new Date(fullDateStr);
+        date.setMilliseconds(ms);
         const serial = getExcelSerial(date);
         // Force US locale formatting with dot as decimal separator
         excelInput.value = Number(serial).toLocaleString('en-US', {
@@ -357,9 +360,12 @@ excelInput.addEventListener('input', (e) => {
         const day = String(dateObj.getUTCDate()).padStart(2, '0');
         const hours = String(dateObj.getUTCHours()).padStart(2, '0');
         const minutes = String(dateObj.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(dateObj.getUTCSeconds()).padStart(2, '0');
+        const ms = dateObj.getUTCMilliseconds();
 
         dateInput.value = `${year}-${month}-${day}`;
-        timeInput.value = `${hours}:${minutes}`;
+        timeInput.value = `${hours}:${minutes}:${seconds}`;
+        msInput.value = ms;
 
         // Show copy button
         copyExcelBtn.classList.remove('opacity-0', 'pointer-events-none');
@@ -367,7 +373,8 @@ excelInput.addEventListener('input', (e) => {
         debouncedLog('ExcelToDate');
     } else {
         dateInput.value = '';
-        timeInput.value = '00:00';
+        timeInput.value = '00:00:00';
+        msInput.value = 0;
         copyExcelBtn.classList.add('opacity-0', 'pointer-events-none');
     }
 });
@@ -406,6 +413,7 @@ timeInput.addEventListener('paste', (e) => {
 
 dateInput.addEventListener('input', updateFromDateInputs);
 timeInput.addEventListener('input', updateFromDateInputs);
+msInput.addEventListener('input', updateFromDateInputs);
 
 const langToggleBtn = document.getElementById('langToggle');
 const langMenu = document.getElementById('langMenu');
