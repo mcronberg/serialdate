@@ -8,7 +8,7 @@ const copyExcelBtn = document.getElementById('copyExcelBtn');
 const msInput = document.getElementById('msInput');
 
 // Version (IMPORTANT: Also update VERSION in sw.js when changing this!)
-const VERSION = '1.93';
+const VERSION = '1.94';
 
 // State
 let currentLang = localStorage.language || 'en';
@@ -171,6 +171,127 @@ const LOCALE_MAP = {
     'sv': 'sv-SE',
     'de': 'de-DE'
 };
+
+// ============================================================================
+// Pseudo-API (query string -> JSON)
+// ----------------------------------------------------------------------------
+// This is NOT a real HTTP API. GitHub Pages serves only static files, so there
+// is no server to respond with `Content-Type: application/json`. Instead, when
+// the URL contains `?format=json`, this client-side code reads the query
+// string, runs the same UTC date math the UI uses, and replaces the page with
+// the raw JSON result. It therefore requires a JavaScript-capable browser and
+// cannot be consumed by tools like `curl` (which receive the static HTML shell,
+// not the rendered JSON). See README.md -> "JSON output (query-string API)".
+//
+//   ?excel=45292&format=json                    serial number -> date
+//   ?date=2024-01-01&format=json                date -> serial number
+//   ?date=2024-01-01&time=13:30:00&format=json  date + time -> serial number
+// ============================================================================
+const EXCEL_BASE_DATE = Date.UTC(1899, 11, 30);
+
+function escapeHtml(str) {
+    return str.replace(/[&<>]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[ch]));
+}
+
+function formatDateParts(date) {
+    const pad = (n) => String(n).padStart(2, '0');
+    return {
+        iso: date.toISOString(),
+        date: `${date.getUTCFullYear()}-${pad(date.getUTCMonth() + 1)}-${pad(date.getUTCDate())}`,
+        time: `${pad(date.getUTCHours())}:${pad(date.getUTCMinutes())}:${pad(date.getUTCSeconds())}`,
+        milliseconds: date.getUTCMilliseconds()
+    };
+}
+
+function excelToJson(rawValue) {
+    const serial = parseFloat(String(rawValue).replace(',', '.'));
+    if (isNaN(serial)) {
+        return { error: `Invalid "excel" value: "${rawValue}" is not a number.` };
+    }
+    if (serial < MIN_EXCEL_DATE || serial > MAX_EXCEL_DATE) {
+        return { error: `"excel" value ${serial} is out of range (${MIN_EXCEL_DATE}-${MAX_EXCEL_DATE}).` };
+    }
+    const date = new Date(EXCEL_BASE_DATE + serial * MS_PER_DAY);
+    return { input: { excel: serial }, excel: serial, ...formatDateParts(date) };
+}
+
+function dateToJson(rawDate, rawTime, rawMs) {
+    const dateMatch = String(rawDate).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!dateMatch) {
+        return { error: `Invalid "date" value: "${rawDate}". Expected ISO format YYYY-MM-DD.` };
+    }
+    const [, year, month, day] = dateMatch.map(Number);
+
+    let hours = 0, minutes = 0, seconds = 0;
+    if (rawTime) {
+        const timeMatch = String(rawTime).match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);
+        if (!timeMatch) {
+            return { error: `Invalid "time" value: "${rawTime}". Expected HH:MM or HH:MM:SS.` };
+        }
+        hours = Number(timeMatch[1]);
+        minutes = Number(timeMatch[2]);
+        seconds = Number(timeMatch[3] || 0);
+    }
+
+    let ms = 0;
+    if (rawMs) {
+        ms = parseInt(rawMs, 10);
+        if (isNaN(ms) || ms < 0 || ms > 999) {
+            return { error: `Invalid "ms" value: "${rawMs}". Expected an integer between 0 and 999.` };
+        }
+    }
+
+    const date = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds, ms));
+    // Reject impossible dates/times (e.g. 2024-13-40 or 25:00) that Date rolled over.
+    if (date.getUTCFullYear() !== year || date.getUTCMonth() !== month - 1 ||
+        date.getUTCDate() !== day || date.getUTCHours() !== hours ||
+        date.getUTCMinutes() !== minutes || date.getUTCSeconds() !== seconds) {
+        return { error: `Invalid date/time: "${rawDate}${rawTime ? ' ' + rawTime : ''}".` };
+    }
+
+    const serial = (date.getTime() - EXCEL_BASE_DATE) / MS_PER_DAY;
+    if (serial < MIN_EXCEL_DATE || serial > MAX_EXCEL_DATE) {
+        return { error: `Date "${rawDate}" is out of range (serial must be ${MIN_EXCEL_DATE}-${MAX_EXCEL_DATE}).` };
+    }
+    const input = { date: rawDate };
+    if (rawTime) input.time = rawTime;
+    if (rawMs) input.ms = ms;
+    return { input, excel: serial, ...formatDateParts(date) };
+}
+
+function buildJsonApiResponse(params) {
+    const excelParam = params.get('excel');
+    const dateParam = params.get('date');
+
+    // `excel` takes precedence if both are supplied.
+    if (excelParam !== null) {
+        return excelToJson(excelParam);
+    }
+    if (dateParam !== null) {
+        return dateToJson(dateParam, params.get('time'), params.get('ms'));
+    }
+    return {
+        error: 'Missing parameter. Provide "excel" (e.g. ?excel=45292&format=json) or "date" (e.g. ?date=2024-01-01&format=json).'
+    };
+}
+
+function renderJsonApiResponse(responseObject) {
+    const json = JSON.stringify(responseObject, null, 2);
+    document.documentElement.innerHTML =
+        '<head><meta charset="utf-8"><title>SerialDate JSON</title></head>' +
+        '<body style="margin:0">' +
+        '<pre style="margin:0;padding:1rem;font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word">' +
+        escapeHtml(json) +
+        '</pre></body>';
+}
+
+if (new URLSearchParams(window.location.search).get('format') === 'json') {
+    renderJsonApiResponse(buildJsonApiResponse(new URLSearchParams(window.location.search)));
+    // The interactive UI below assumes the normal DOM, which we have just
+    // replaced with the JSON response. This intentional throw halts the rest of
+    // script.js. It only runs in JSON mode, where nothing reads the console.
+    throw new Error('SerialDate: JSON response rendered; UI initialization skipped.');
+}
 
 // Utils
 function getExcelSerial(dateObj) {
