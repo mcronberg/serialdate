@@ -1,25 +1,22 @@
 {
-    "name": "Serial Date Converter - Excel Date Converter",
-    "short_name": "SerialDate",
-    "description": "Convert Excel serial date numbers to human-readable dates and vice versa. Works offline.",
-    "start_url": "./index.html",
-    "scope": "./",
-    "display": "standalone",
-    "orientation": "any",
-    "background_color": "#0f172a",
-    "theme_color": "#0f172a",
-    "categories": [
-        "productivity",
-        "utilities"
-    ],
-    "lang": "en",
-    "dir": "ltr",
-    "icons": [
-        {
-            "src": "assets/icon.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any"
-        }
-    ]
+  "name": "Serial Date Converter - Excel Date Converter",
+  "short_name": "SerialDate",
+  "description": "Convert Excel serial date numbers to human-readable dates and vice versa. Works offline.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "categories": ["productivity", "utilities"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "assets/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }

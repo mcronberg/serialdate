@@ -103,13 +103,13 @@ https://mcronberg.github.io/serialdate/?date=2024-01-01&time=13:30&ms=250&format
 
 ### Parameters
 
-| Parameter | Description | Example |
-|-----------|-------------|---------|
-| `format`  | Must be `json` to enable JSON output. | `format=json` |
-| `excel`   | Excel serial number to convert to a date. Comma decimals are accepted (`45614,5`). Takes precedence if both `excel` and `date` are given. | `excel=45292` |
-| `date`    | Date to convert to a serial number, in ISO format `YYYY-MM-DD`. | `date=2024-01-01` |
-| `time`    | Optional time of day, `HH:MM` or `HH:MM:SS`. Used with `date`. | `time=13:30:00` |
-| `ms`      | Optional milliseconds (`0`–`999`). Used with `date`. | `ms=250` |
+| Parameter | Description                                                                                                                               | Example           |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `format`  | Must be `json` to enable JSON output.                                                                                                     | `format=json`     |
+| `excel`   | Excel serial number to convert to a date. Comma decimals are accepted (`45614,5`). Takes precedence if both `excel` and `date` are given. | `excel=45292`     |
+| `date`    | Date to convert to a serial number, in ISO format `YYYY-MM-DD`.                                                                           | `date=2024-01-01` |
+| `time`    | Optional time of day, `HH:MM` or `HH:MM:SS`. Used with `date`.                                                                            | `time=13:30:00`   |
+| `ms`      | Optional milliseconds (`0`–`999`). Used with `date`.                                                                                      | `ms=250`          |
 
 Invalid or missing input returns a JSON object with an `error` field, for example:
 

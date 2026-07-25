@@ -1,73 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Serial Date Converter - Excel Date to Readable Date Converter</title>
 
     <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="Free online Excel serial date converter. Convert Excel date numbers to human-readable dates and vice versa. Works offline as PWA. Supports multiple languages.">
-    <meta name="keywords"
-        content="excel date converter, serial date, excel serial number, date converter, excel to date, date to excel, pwa, offline converter">
-    <meta name="author" content="Michell Cronberg">
-    <meta name="robots" content="index, follow">
+    <meta name="description" content="Free online Excel serial date converter. Convert Excel date numbers to human-readable dates and vice versa. Works offline as PWA. Supports multiple languages." />
+    <meta name="keywords" content="excel date converter, serial date, excel serial number, date converter, excel to date, date to excel, pwa, offline converter" />
+    <meta name="author" content="Michell Cronberg" />
+    <meta name="robots" content="index, follow" />
     <meta name="google-site-verification" content="1bygD12v6V1GrpYFujwrkd5qcw-0Nvg7ZyriZ63_V3c" />
-    <link rel="canonical" href="https://mcronberg.github.io/serialdate/">
+    <link rel="canonical" href="https://mcronberg.github.io/serialdate/" />
 
     <!-- Alternate Language Links -->
-    <link rel="alternate" hreflang="en" href="https://mcronberg.github.io/serialdate/">
-    <link rel="alternate" hreflang="da" href="https://mcronberg.github.io/serialdate/">
-    <link rel="alternate" hreflang="no" href="https://mcronberg.github.io/serialdate/">
-    <link rel="alternate" hreflang="sv" href="https://mcronberg.github.io/serialdate/">
-    <link rel="alternate" hreflang="de" href="https://mcronberg.github.io/serialdate/">
-    <link rel="alternate" hreflang="x-default" href="https://mcronberg.github.io/serialdate/">
+    <link rel="alternate" hreflang="en" href="https://mcronberg.github.io/serialdate/" />
+    <link rel="alternate" hreflang="da" href="https://mcronberg.github.io/serialdate/" />
+    <link rel="alternate" hreflang="no" href="https://mcronberg.github.io/serialdate/" />
+    <link rel="alternate" hreflang="sv" href="https://mcronberg.github.io/serialdate/" />
+    <link rel="alternate" hreflang="de" href="https://mcronberg.github.io/serialdate/" />
+    <link rel="alternate" hreflang="x-default" href="https://mcronberg.github.io/serialdate/" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mcronberg.github.io/serialdate/">
-    <meta property="og:title" content="Serial Date Converter - Excel Date Converter">
-    <meta property="og:description"
-        content="Free online Excel serial date converter. Convert Excel date numbers to human-readable dates and vice versa. Works offline as PWA.">
-    <meta property="og:image" content="https://mcronberg.github.io/serialdate/assets/icon.png">
-    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mcronberg.github.io/serialdate/" />
+    <meta property="og:title" content="Serial Date Converter - Excel Date Converter" />
+    <meta property="og:description" content="Free online Excel serial date converter. Convert Excel date numbers to human-readable dates and vice versa. Works offline as PWA." />
+    <meta property="og:image" content="https://mcronberg.github.io/serialdate/assets/icon.png" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:url" content="https://mcronberg.github.io/serialdate/">
-    <meta name="twitter:title" content="Serial Date Converter - Excel Date Converter">
-    <meta name="twitter:description"
-        content="Free online Excel serial date converter. Convert Excel date numbers to human-readable dates and vice versa.">
-    <meta name="twitter:image" content="https://mcronberg.github.io/serialdate/assets/icon.png">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:url" content="https://mcronberg.github.io/serialdate/" />
+    <meta name="twitter:title" content="Serial Date Converter - Excel Date Converter" />
+    <meta name="twitter:description" content="Free online Excel serial date converter. Convert Excel date numbers to human-readable dates and vice versa." />
+    <meta name="twitter:image" content="https://mcronberg.github.io/serialdate/assets/icon.png" />
 
     <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#020617">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="SerialDate">
-    <link rel="apple-touch-icon" href="assets/icon.png">
+    <meta name="theme-color" content="#020617" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="SerialDate" />
+    <link rel="apple-touch-icon" href="assets/icon.png" />
 
     <!-- DNS prefetch for analytics endpoint -->
-    <link rel="dns-prefetch" href="https://docs.google.com">
+    <link rel="dns-prefetch" href="https://docs.google.com" />
 
-    <link rel="stylesheet" href="tailwind.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="assets/icon.png">
+    <link rel="stylesheet" href="tailwind.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/png" href="assets/icon.png" />
     <script>
-        // Dark mode initialization - use system preference by default
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
+      // Dark mode initialization - use system preference by default
+      if (localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
     </script>
 
     <!-- Structured Data / Schema.org for SEO -->
     <script type="application/ld+json">
-    {
+      {
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Serial Date Converter",
@@ -76,250 +71,230 @@
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Any",
         "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
         },
         "author": {
-            "@type": "Person",
-            "name": "Michell Cronberg",
-            "url": "https://github.com/mcronberg"
+          "@type": "Person",
+          "name": "Michell Cronberg",
+          "url": "https://github.com/mcronberg"
         },
         "inLanguage": ["en", "da", "no", "sv", "de"],
         "browserRequirements": "Requires JavaScript. Requires HTML5.",
         "softwareVersion": "1.96",
         "screenshot": "https://mcronberg.github.io/serialdate/assets/icon.png",
-        "featureList": [
-            "Convert Excel serial dates to readable dates",
-            "Convert dates to Excel serial numbers",
-            "Offline support (PWA)",
-            "Multi-language support (EN, DA, NO, SV, DE)",
-            "Dark mode support",
-            "Quick reference tables"
-        ]
-    }
+        "featureList": ["Convert Excel serial dates to readable dates", "Convert dates to Excel serial numbers", "Offline support (PWA)", "Multi-language support (EN, DA, NO, SV, DE)", "Dark mode support", "Quick reference tables"]
+      }
     </script>
-</head>
+  </head>
 
-<body
-    class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white min-h-screen flex flex-col items-center p-4 md:p-8 font-sans selection:bg-teal-500 selection:text-white transition-colors duration-300">
-
+  <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white min-h-screen flex flex-col items-center p-4 md:p-8 font-sans selection:bg-teal-500 selection:text-white transition-colors duration-300">
     <!-- Background Gradients -->
     <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-teal-500/10 rounded-full blur-[100px]"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[100px]"></div>
+      <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-teal-500/10 rounded-full blur-[100px]"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[100px]"></div>
     </div>
 
     <main class="w-full max-w-5xl relative">
-
-        <!-- Language Toggle & GitHub Link -->
-        <div class="absolute top-0 right-0 flex items-center gap-3">
-            <button id="themeToggle"
-                class="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
-                aria-label="Toggle dark mode" title="Toggle theme">
-                <svg class="h-5 w-5 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    aria-hidden="true">
-                    <title>Switch to dark mode</title>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-                <svg class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    aria-hidden="true">
-                    <title>Switch to light mode</title>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
+      <!-- Language Toggle & GitHub Link -->
+      <div class="absolute top-0 right-0 flex items-center gap-3">
+        <button id="themeToggle" class="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors" aria-label="Toggle dark mode" title="Toggle theme">
+          <svg class="h-5 w-5 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <title>Switch to dark mode</title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <svg class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <title>Switch to light mode</title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+        <a href="https://github.com/mcronberg/serialdate" target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors" title="View on GitHub">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <title>GitHub Repository</title>
+            <path
+              d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+            />
+          </svg>
+        </a>
+        <div class="relative">
+          <button
+            id="langToggle"
+            class="text-xs font-bold uppercase tracking-wider bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 transition-colors px-4 py-2 rounded-full border border-slate-300 dark:border-white/5 flex items-center gap-2"
+            aria-label="Select language"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span id="currentLang" class="flex items-center gap-2">
+              <img id="currentFlagImg" class="w-4 h-3 rounded-sm object-cover" src="assets/flags/gb.svg" alt="" />
+              EN
+            </span>
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <title>Open language menu</title>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="langMenu" class="hidden absolute top-full right-0 mt-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-white/10 rounded-xl overflow-hidden shadow-lg z-50" role="menu" aria-label="Language options">
+            <button data-lang="en" class="lang-option w-full px-4 py-2 text-left hover:bg-slate-100 dark:hover:bg-white/5 transition-colors flex items-center gap-2 text-sm" role="menuitem" aria-label="English">
+              <img class="w-4 h-3 rounded-sm object-cover" src="assets/flags/gb.svg" alt="" aria-hidden="true" />
+              EN
             </button>
-            <a href="https://github.com/mcronberg/serialdate" target="_blank" rel="noopener noreferrer"
-                class="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
-                title="View on GitHub">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"
-                    aria-hidden="true">
-                    <title>GitHub Repository</title>
-                    <path
-                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-            </a>
-            <div class="relative">
-                <button id="langToggle"
-                    class="text-xs font-bold uppercase tracking-wider bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 transition-colors px-4 py-2 rounded-full border border-slate-300 dark:border-white/5 flex items-center gap-2"
-                    aria-label="Select language" aria-haspopup="true" aria-expanded="false">
-                    <span id="currentLang" class="flex items-center gap-2">
-                        <img id="currentFlagImg" class="w-4 h-3 rounded-sm object-cover" src="assets/flags/gb.svg" alt="">
-                        EN
-                    </span>
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <title>Open language menu</title>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <div id="langMenu"
-                    class="hidden absolute top-full right-0 mt-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-white/10 rounded-xl overflow-hidden shadow-lg z-50"
-                    role="menu" aria-label="Language options">
-                    <button data-lang="en"
-                        class="lang-option w-full px-4 py-2 text-left hover:bg-slate-100 dark:hover:bg-white/5 transition-colors flex items-center gap-2 text-sm"
-                        role="menuitem" aria-label="English">
-                        <img class="w-4 h-3 rounded-sm object-cover" src="assets/flags/gb.svg" alt="" aria-hidden="true">
-                        EN
-                    </button>
-                    <button data-lang="da"
-                        class="lang-option w-full px-4 py-2 text-left hover:bg-slate-100 dark:hover:bg-white/5 transition-colors flex items-center gap-2 text-sm"
-                        role="menuitem" aria-label="Dansk">
-                        <img class="w-4 h-3 rounded-sm object-cover" src="assets/flags/dk.svg" alt="" aria-hidden="true">
-                        DA
-                    </button>
-                    <button data-lang="no"
-                        class="lang-option w-full px-4 py-2 text-left hover:bg-slate-100 dark:hover:bg-white/5 transition-colors flex items-center gap-2 text-sm"
-                        role="menuitem" aria-label="Norsk">
-                        <img class="w-4 h-3 rounded-sm object-cover" src="assets/flags/no.svg" alt="" aria-hidden="true">
-                        NO
-                    </button>
-                    <button data-lang="sv"
-                        class="lang-option w-full px-4 py-2 text-left hover:bg-slate-100 dark:hover:bg-white/5 transition-colors flex items-center gap-2 text-sm"
-                        role="menuitem" aria-label="Svenska">
-                        <img class="w-4 h-3 rounded-sm object-cover" src="assets/flags/se.svg" alt="" aria-hidden="true">
-                        SV
-                    </button>
-                    <button data-lang="de"
-                        class="lang-option w-full px-4 py-2 text-left hover:bg-slate-100 dark:hover:bg-white/5 transition-colors flex items-center gap-2 text-sm"
-                        role="menuitem" aria-label="Deutsch">
-                        <img class="w-4 h-3 rounded-sm object-cover" src="assets/flags/de.svg" alt="" aria-hidden="true">
-                        DE
-                    </button>
-                </div>
-            </div>
+            <button data-lang="da" class="lang-option w-full px-4 py-2 text-left hover:bg-slate-100 dark:hover:bg-white/5 transition-colors flex items-center gap-2 text-sm" role="menuitem" aria-label="Dansk">
+              <img class="w-4 h-3 rounded-sm object-cover" src="assets/flags/dk.svg" alt="" aria-hidden="true" />
+              DA
+            </button>
+            <button data-lang="no" class="lang-option w-full px-4 py-2 text-left hover:bg-slate-100 dark:hover:bg-white/5 transition-colors flex items-center gap-2 text-sm" role="menuitem" aria-label="Norsk">
+              <img class="w-4 h-3 rounded-sm object-cover" src="assets/flags/no.svg" alt="" aria-hidden="true" />
+              NO
+            </button>
+            <button data-lang="sv" class="lang-option w-full px-4 py-2 text-left hover:bg-slate-100 dark:hover:bg-white/5 transition-colors flex items-center gap-2 text-sm" role="menuitem" aria-label="Svenska">
+              <img class="w-4 h-3 rounded-sm object-cover" src="assets/flags/se.svg" alt="" aria-hidden="true" />
+              SV
+            </button>
+            <button data-lang="de" class="lang-option w-full px-4 py-2 text-left hover:bg-slate-100 dark:hover:bg-white/5 transition-colors flex items-center gap-2 text-sm" role="menuitem" aria-label="Deutsch">
+              <img class="w-4 h-3 rounded-sm object-cover" src="assets/flags/de.svg" alt="" aria-hidden="true" />
+              DE
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <div class="text-center mb-8 mt-6">
+        <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-blue-600 dark:from-teal-200 dark:to-blue-200" data-i18n="title">SerialDateConverter</h1>
+      </div>
+
+      <!-- Converters -->
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <!-- Date to Excel -->
+        <div class="space-y-3">
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400 uppercase tracking-wider" data-i18n="labelDate">Date & Time</label>
+          <div class="flex gap-4">
+            <input
+              type="date"
+              id="dateInput"
+              class="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-6 py-4 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all"
+            />
+            <input
+              type="time"
+              id="timeInput"
+              value="00:00:00"
+              step="1"
+              class="w-44 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-4 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all"
+            />
+            <input
+              type="number"
+              id="msInput"
+              value="0"
+              min="0"
+              max="999"
+              placeholder="ms"
+              class="w-24 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-4 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all"
+            />
+          </div>
         </div>
 
-        <!-- Header -->
-        <div class="text-center mb-8 mt-6">
-            <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-blue-600 dark:from-teal-200 dark:to-blue-200"
-                data-i18n="title">SerialDateConverter</h1>
+        <!-- Excel to Date -->
+        <div class="space-y-3">
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400 uppercase tracking-wider" data-i18n="labelExcel">Excel Serial Number</label>
+          <div class="relative">
+            <input
+              type="text"
+              inputmode="decimal"
+              id="excelInput"
+              placeholder="e.g. 45614.5"
+              step="any"
+              class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-6 py-4 pr-14 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all"
+            />
+            <button id="copyExcelBtn" type="button" title="Copy to clipboard" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors opacity-0 pointer-events-none" aria-label="Copy Excel value to clipboard">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <title>Copy</title>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+            </button>
+          </div>
         </div>
+      </div>
 
-        <!-- Converters -->
-        <div class="grid md:grid-cols-2 gap-8 mb-16">
-            <!-- Date to Excel -->
-            <div class="space-y-3">
-                <label class="block text-sm font-medium text-slate-600 dark:text-slate-400 uppercase tracking-wider"
-                    data-i18n="labelDate">Date & Time</label>
-                <div class="flex gap-4">
-                    <input type="date" id="dateInput"
-                        class="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-6 py-4 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all">
-                    <input type="time" id="timeInput" value="00:00:00" step="1"
-                        class="w-44 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-4 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all">
-                    <input type="number" id="msInput" value="0" min="0" max="999" placeholder="ms"
-                        class="w-24 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-4 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all">
-                </div>
-            </div>
+      <!-- Reference Table -->
+      <div>
+        <h2 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-6 flex items-center gap-4">
+          <span data-i18n="quickReference">Quick Reference</span>
+          <span class="text-sm font-normal text-slate-500 dark:text-slate-400" data-i18n="quickReferenceHelp">(click to copy serial date)</span>
+          <div class="h-px flex-1 bg-slate-300 dark:bg-slate-800"></div>
+        </h2>
 
-            <!-- Excel to Date -->
-            <div class="space-y-3">
-                <label class="block text-sm font-medium text-slate-600 dark:text-slate-400 uppercase tracking-wider"
-                    data-i18n="labelExcel">Excel Serial Number</label>
-                <div class="relative">
-                    <input type="text" inputmode="decimal" id="excelInput" placeholder="e.g. 45614.5" step="any"
-                        class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-6 py-4 pr-14 text-xl text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all">
-                    <button id="copyExcelBtn" type="button" title="Copy to clipboard"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors opacity-0 pointer-events-none"
-                        aria-label="Copy Excel value to clipboard">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <title>Copy</title>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
-                            </path>
-                        </svg>
-                    </button>
-                </div>
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Past Dates -->
+          <div class="space-y-4">
+            <h3 class="text-sm font-medium text-teal-600 dark:text-teal-400 uppercase tracking-wider" data-i18n="headerPast">Past</h3>
+            <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-slate-800 overflow-hidden">
+              <table class="w-full text-sm text-left">
+                <thead class="text-xs text-slate-600 dark:text-slate-400 uppercase bg-slate-100 dark:bg-slate-800">
+                  <tr>
+                    <th class="px-4 py-3 font-medium" data-i18n="colDescription">Description</th>
+                    <th class="px-4 py-3 font-medium text-right" data-i18n="colExcel">Excel</th>
+                    <th class="px-4 py-3 font-medium text-right" data-i18n="colDate">Date</th>
+                  </tr>
+                </thead>
+                <tbody id="pastTableBody" class="divide-y divide-slate-200 dark:divide-slate-800">
+                  <!-- Rows will be populated by JS -->
+                </tbody>
+              </table>
             </div>
+          </div>
+
+          <!-- Future Dates -->
+          <div class="space-y-4">
+            <h3 class="text-sm font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wider" data-i18n="headerFuture">Future</h3>
+            <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-slate-800 overflow-hidden">
+              <table class="w-full text-sm text-left">
+                <thead class="text-xs text-slate-600 dark:text-slate-400 uppercase bg-slate-100 dark:bg-slate-800">
+                  <tr>
+                    <th class="px-4 py-3 font-medium" data-i18n="colDescription">Description</th>
+                    <th class="px-4 py-3 font-medium text-right" data-i18n="colExcel">Excel</th>
+                    <th class="px-4 py-3 font-medium text-right" data-i18n="colDate">Date</th>
+                  </tr>
+                </thead>
+                <tbody id="futureTableBody" class="divide-y divide-slate-200 dark:divide-slate-800">
+                  <!-- Rows will be populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-
-        <!-- Reference Table -->
-        <div>
-            <h2 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-6 flex items-center gap-4">
-                <span data-i18n="quickReference">Quick Reference</span>
-                <span class="text-sm font-normal text-slate-500 dark:text-slate-400"
-                    data-i18n="quickReferenceHelp">(click to copy serial date)</span>
-                <div class="h-px flex-1 bg-slate-300 dark:bg-slate-800"></div>
-            </h2>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Past Dates -->
-                <div class="space-y-4">
-                    <h3 class="text-sm font-medium text-teal-600 dark:text-teal-400 uppercase tracking-wider"
-                        data-i18n="headerPast">Past
-                    </h3>
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-slate-800 overflow-hidden">
-                        <table class="w-full text-sm text-left">
-                            <thead
-                                class="text-xs text-slate-600 dark:text-slate-400 uppercase bg-slate-100 dark:bg-slate-800">
-                                <tr>
-                                    <th class="px-4 py-3 font-medium" data-i18n="colDescription">Description</th>
-                                    <th class="px-4 py-3 font-medium text-right" data-i18n="colExcel">Excel</th>
-                                    <th class="px-4 py-3 font-medium text-right" data-i18n="colDate">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody id="pastTableBody" class="divide-y divide-slate-200 dark:divide-slate-800">
-                                <!-- Rows will be populated by JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Future Dates -->
-                <div class="space-y-4">
-                    <h3 class="text-sm font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wider"
-                        data-i18n="headerFuture">
-                        Future</h3>
-                    <div
-                        class="bg-white dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-slate-800 overflow-hidden">
-                        <table class="w-full text-sm text-left">
-                            <thead
-                                class="text-xs text-slate-600 dark:text-slate-400 uppercase bg-slate-100 dark:bg-slate-800">
-                                <tr>
-                                    <th class="px-4 py-3 font-medium" data-i18n="colDescription">Description</th>
-                                    <th class="px-4 py-3 font-medium text-right" data-i18n="colExcel">Excel</th>
-                                    <th class="px-4 py-3 font-medium text-right" data-i18n="colDate">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody id="futureTableBody" class="divide-y divide-slate-200 dark:divide-slate-800">
-                                <!-- Rows will be populated by JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </main>
 
     <script src="date-utils.js"></script>
     <script src="script.js"></script>
     <script>
-        if ('serviceWorker' in navigator) {
-            // Auto-apply updates: once a new service worker takes control of
-            // this page, reload automatically so users always get the latest
-            // version without needing a manual hard-refresh (Ctrl+F5).
-            let refreshingAfterUpdate = false;
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                if (refreshingAfterUpdate) return;
-                refreshingAfterUpdate = true;
-                window.location.reload();
+      if ("serviceWorker" in navigator) {
+        // Auto-apply updates: once a new service worker takes control of
+        // this page, reload automatically so users always get the latest
+        // version without needing a manual hard-refresh (Ctrl+F5).
+        let refreshingAfterUpdate = false;
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          if (refreshingAfterUpdate) return;
+          refreshingAfterUpdate = true;
+          window.location.reload();
+        });
+
+        navigator.serviceWorker
+          .register("sw.js")
+          .then((registration) => {
+            // Browsers only check for a new service worker on navigation
+            // (throttled to ~once/24h). Proactively re-check whenever the
+            // tab regains focus so long-lived/installed-PWA sessions pick
+            // up updates promptly too.
+            document.addEventListener("visibilitychange", () => {
+              if (document.visibilityState === "visible") {
+                registration.update().catch(() => {});
+              }
             });
-
-            navigator.serviceWorker.register('sw.js').then((registration) => {
-                // Browsers only check for a new service worker on navigation
-                // (throttled to ~once/24h). Proactively re-check whenever the
-                // tab regains focus so long-lived/installed-PWA sessions pick
-                // up updates promptly too.
-                document.addEventListener('visibilitychange', () => {
-                    if (document.visibilityState === 'visible') {
-                        registration.update().catch(() => { });
-                    }
-                });
-            }).catch(() => { });
-        }
+          })
+          .catch(() => {});
+      }
     </script>
-</body>
-
+  </body>
 </html>
