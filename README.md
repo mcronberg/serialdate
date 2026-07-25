@@ -81,3 +81,12 @@ Interactive API docs: **https://serialdate-api.devcronberg.dk/docs**
 ## Credits
 
 Flag icons in `assets/flags/` are sourced from the [flag-icons](https://github.com/lipis/flag-icons) project by [Hampus Sethfors](https://github.com/lipis), licensed under the MIT License.
+
+## About the Author
+
+**Michell Cronberg** is a Danish software developer, instructor, and author with a passion for
+building things and sharing what he learns along the way — whether that's through code, teaching,
+or writing.
+
+[GitHub](https://github.com/mcronberg) · [Support on Ko-fi](https://ko-fi.com/T3L723V2N8)
+
