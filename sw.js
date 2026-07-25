@@ -1,5 +1,5 @@
 // Version (IMPORTANT: Keep in sync with VERSION in script.js!)
-const VERSION = "1.96";
+const VERSION = "1.97";
 const CACHE_NAME = `serial-date-converter-v${VERSION}`;
 const ASSETS = [
   "./",

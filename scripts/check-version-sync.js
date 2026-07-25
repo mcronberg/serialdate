@@ -18,8 +18,8 @@ function readVersion(file, regex) {
 }
 
 const versions = {
-  "script.js": readVersion("script.js", /const VERSION = '([\d.]+)'/),
-  "sw.js": readVersion("sw.js", /const VERSION = '([\d.]+)'/),
+  "script.js": readVersion("script.js", /const VERSION = ['"]([\d.]+)['"]/),
+  "sw.js": readVersion("sw.js", /const VERSION = ['"]([\d.]+)['"]/),
   "index.html (JSON-LD softwareVersion)": readVersion("index.html", /"softwareVersion":\s*"([\d.]+)"/),
 };
 
