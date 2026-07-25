@@ -4,6 +4,8 @@
 
 🔗 **Launch Application:** [https://mcronberg.github.io/serialdate/](https://mcronberg.github.io/serialdate/)
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T3L723V2N8)
+
 ## Features
 
 ✅ **Bi-directional Conversion** - Convert dates to Excel serial numbers and vice versa  

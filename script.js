@@ -8,7 +8,7 @@ const copyExcelBtn = document.getElementById("copyExcelBtn");
 const msInput = document.getElementById("msInput");
 
 // Version (IMPORTANT: Also update VERSION in sw.js when changing this!)
-const VERSION = "1.97";
+const VERSION = "1.98";
 
 // State
 let currentLang = localStorage.language || "en";
