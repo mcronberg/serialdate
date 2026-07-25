@@ -1,0 +1,14 @@
+{
+  "name": "serialdate",
+  "private": true,
+  "version": "1.96.0",
+  "description": "Serial Date Converter - Excel serial date <-> human-readable date PWA",
+  "scripts": {
+    "build:css": "tailwindcss -i ./tailwind.input.css -o ./tailwind.css --minify",
+    "test": "node --test test/*.test.js",
+    "check:version-sync": "node scripts/check-version-sync.js"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

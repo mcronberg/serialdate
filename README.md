@@ -46,6 +46,21 @@ This tool is a Progressive Web App (PWA), enabling installation on your device f
 *   **Localization**: Switch the interface language between English, Danish, Norwegian, Swedish, and German via the toggle button. The date format detection adapts to your selected language.
 *   **Reference Table**: Consult the dynamic table for quick lookup of common past and future dates and their serial equivalents. Click any Excel value to copy it to clipboard.
 
+## Development
+
+The app itself is plain static files - just open `index.html` or serve the folder (e.g. `python -m http.server 8000`), no build step required to run it.
+
+A small Node/npm dev-only toolchain is used to (1) pre-build the purged, static `tailwind.css` and (2) run tests:
+
+```bash
+npm install                  # one-time
+npm run build:css            # rebuild tailwind.css after changing Tailwind classes
+npm test                     # run the date-utils.js unit tests
+npm run check:version-sync   # verify VERSION is in sync across script.js/sw.js/index.html
+```
+
+See [CLAUDE.md](CLAUDE.md) for full architecture notes.
+
 ## JSON output (query-string API)
 
 You can get the conversion result as JSON by adding `format=json` to the URL. The page then skips the normal interface and renders the raw JSON response instead.
@@ -113,3 +128,7 @@ The practical consequences:
 *   **It is intended for humans and quick, bookmarkable lookups in the browser**, or for embedding a result link — not for automated integrations.
 
 If you need a real HTTP API (proper `application/json`, consumable by `curl`, servers, and integrations), the conversion logic would need to be deployed to a serverless function (e.g. Cloudflare Workers, Vercel, or Netlify Functions) in addition to this static site.
+
+## Credits
+
+Flag icons in `assets/flags/` are sourced from the [flag-icons](https://github.com/lipis/flag-icons) project by [Hampus Sethfors](https://github.com/lipis), licensed under the MIT License.
